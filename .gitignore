@@ -1,0 +1,9 @@
+*~
+*.pyc
+*.pyo
+dist
+build
+yould.egg-info
+ez_setup.py
+setuptools-*.egg
+*.yould

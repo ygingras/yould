@@ -1,0 +1,21 @@
+
+0.3.7:
+   - added low memory mode
+   - added timeout
+
+0.3.5:
+   - added regex filters
+   - switch to GPLv3
+   - fixed --list-sets
+   - added --version
+
+0.3.3:
+   - fixed installation problems when ez_setup.py is not there
+   - added cache to revent words regeneration 
+
+0.3.1: 
+   - installation with setuptools
+   - packaging of trained engines
+       
+0.1: 
+   - initial release
