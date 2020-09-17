@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 # Yould: a generator for pronounceable random words
-# Copyright (C) 2007 Yannick Gingras <ygingras@ygingras.net>
+# Copyright (C) 2007, 2020 Yannick Gingras <ygingras@ygingras.net>
 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@
 
 FORMAT_VERSION = 2
 
-from cPickle import load, dump
+from pickle import load, dump
 from pprint import pformat, pprint
 from pkg_resources import resource_filename, resource_exists, resource_listdir
 from random import random
@@ -28,8 +28,8 @@ from collections import deque
 from threading import Timer
 import re
 import os
-import data
-from data import trainsets
+from . import data
+from .data import trainsets
 
 
 WORD_PAT = re.compile(r"\b(\w+)\b", re.UNICODE) 
@@ -104,7 +104,7 @@ class TrainSet:
         for match in WORD_PAT.finditer(data):
             word = match.group()
             # trim digits (too ugly with the regexp)
-            word = u"".join(filter(lambda c:c.isalpha(), word))
+            word = "".join([c for c in word if c.isalpha()])
             if not (min_len <= len(word) <= max_len):
                 continue
 
@@ -130,10 +130,10 @@ class TrainSet:
 
     def update_probs(self):
         self.probs = {}
-        for k in self.counts.keys():
+        for k in list(self.counts.keys()):
             nb_trs, trs_h = self.counts[k]
             self.probs[k] = [ (1.0*freq/nb_trs, nc)
-                              for nc, freq in trs_h.items()]
+                              for nc, freq in list(trs_h.items())]
             self.probs[k].sort()
             self.probs[k].reverse()
 
@@ -186,9 +186,8 @@ class TrainSet:
 def list_trainsets():
     # FIXME: won't work with a zipped egg
     return [f for f, e in
-            filter(lambda t:t[1] == ".yould",
-                   map(os.path.splitext,
-                       resource_listdir(data.__name__, "trainsets")))]
+            [t for t in map(os.path.splitext,
+                       resource_listdir(data.__name__, "trainsets")) if t[1] == ".yould"]]
     
             
 def find_trainset(name):

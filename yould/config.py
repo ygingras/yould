@@ -1,5 +1,5 @@
 # Yould: a generator for pronounceable random words
-# Copyright (C) 2007 Yannick Gingras <ygingras@ygingras.net>
+# Copyright (C) 2007,2020 Yannick Gingras <ygingras@ygingras.net>
 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -14,5 +14,5 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-__version__ = "0.3.7"
+__version__ = "0.4.0"
 

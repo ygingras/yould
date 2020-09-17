@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-# Copyright 2007 Yannick Gingras <ygingras@ygingras.net>
+# Copyright 2007, 2020 Yannick Gingras <ygingras@ygingras.net>
 
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston,
 # MA 02110-1301 USA
 
-from urllib import urlopen
+from urllib.request import urlopen
 from re import compile
 from random import sample
 from optparse import OptionParser
@@ -36,14 +36,14 @@ def fetch(url):
 
 def getsample(books, nb_books):
     for book in sample(books, min(len(books), nb_books)):
-        print book, 
+        print(book, end=' ') 
         try:
             data = fetch(MAIN_URL % book)
             dl = DL_PAT.findall(data)[0]
             open("%s.txt" % book, "w").write(fetch(BASE_URL + dl))
-            print BASE_URL + dl
+            print(BASE_URL + dl)
         except:
-            print "* Error *"
+            print("* Error *")
 
 # Langs with enough stuff: zh, nl, en, fi, fr, de, it, pt, es, tl
 # Langs that won't parse: zh, en

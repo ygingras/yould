@@ -1,7 +1,7 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 # Yould: a generator for pronounceable random words
-# Copyright (C) 2007 Yannick Gingras <ygingras@ygingras.net>
+# Copyright (C) 2007,2020 Yannick Gingras <ygingras@ygingras.net>
 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -19,10 +19,11 @@
 import sys
 import re
 
-from prob import find_trainset, list_trainsets
+from .prob import find_trainset, list_trainsets
+from .config import __version__
+
 from pprint import pprint
 from optparse import OptionParser
-from config import __version__
 
 def main():
     parser = OptionParser()
@@ -59,11 +60,11 @@ def main():
         parser.error("Unrecognized arguments: %s" % ", ".join(args))
 
     if opts.version:
-        print "Yould %s" % __version__
+        print("Yould %s" % __version__)
         sys.exit(0)
     
     if opts.list:
-        print ", ".join(list_trainsets())
+        print(", ".join(list_trainsets()))
         sys.exit(0)
     
     trainset = find_trainset(opts.trainset)
@@ -84,7 +85,7 @@ def main():
     trainset.init_cache(opts.nb_words)
     if opts.max_secs:
         trainset.start_timer(opts.max_secs)
-    for i in xrange(opts.nb_words):
+    for i in range(opts.nb_words):
         word = trainset.gen(not opts.real_words,
                             opts.min,
                             opts.max,
@@ -93,7 +94,7 @@ def main():
             sys.exit(1)
         
         # TODO: locale dependant encoding
-        out.write(word.encode("utf-8"))
+        out.write(word)
         out.write("\n")
 
 

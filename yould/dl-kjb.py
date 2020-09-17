@@ -15,7 +15,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston,
 # MA 02110-1301 USA
 
-from urllib import urlopen
+from urllib.request import urlopen
 from re import compile
 
 # King James Bible
@@ -36,11 +36,11 @@ MAX = 2**22
 for book in BOOKS:
     try:
         data = urlopen(MAIN_URL % book).read(MAX)
-        print book, 
+        print(book, end=' ') 
         dl = DL_PAT.findall(data)[0]
-        print dl
+        print(dl)
         stream = urlopen(BASE_URL + dl)
         open("%04d.txt" % book, "w").write(stream.read(MAX))
     except:
-        print "Error"
+        print("Error")
     

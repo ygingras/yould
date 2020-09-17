@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-# Copyright 2007 Yannick Gingras <ygingras@ygingras.net>
+# Copyright 2007, 2020 Yannick Gingras <ygingras@ygingras.net>
 
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -112,8 +112,7 @@ def has_whois(dom):
     #print "-" * 30
     #print "".join(lines)
 
-    avail = len(filter(lambda l:l.startswith(WHOIS_ERR[tld]),
-                       lines)) != 0
+    avail = len([l for l in lines if l.startswith(WHOIS_ERR[tld])]) != 0
 
     if pipe.close():
         raise Exception("whois error")

@@ -28,10 +28,10 @@ except ImportError:
 try:
     from setuptools import setup, find_packages
 except ImportError:
-    print "You don't have setuptools installed.  Put ez_setup.py"
-    print "in the same directory as setup.py (this script) and try again."
-    print "You can get it here:"
-    print "  http://peak.telecommunity.com/dist/ez_setup.py"
+    print("You don't have setuptools installed.  Put ez_setup.py")
+    print("in the same directory as setup.py (this script) and try again.")
+    print("You can get it here:")
+    print("  http://peak.telecommunity.com/dist/ez_setup.py")
     sys.exit(1)
 
 from yould.config import __version__

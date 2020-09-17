@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 # Yould: a generator for pronounceable random words
-# Copyright (C) 2007 Yannick Gingras <ygingras@ygingras.net>
+# Copyright (C) 2007, 2020 Yannick Gingras <ygingras@ygingras.net>
 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@ import os
 import sys
 from optparse import OptionParser
 
-from prob import *
+from .prob import *
 
 BODY_TAG = " OF THE PROJECT GUTENBERG EBOOK"
 
@@ -65,7 +65,7 @@ def main():
         if opts.gutenberg:
             file = gut_strip(file)
         for line in file:
-            line = unicode(line, opts.encoding)
+            line = str(line, opts.encoding)
             trainset.learn(line, True)
 
     trainset.update_probs()
